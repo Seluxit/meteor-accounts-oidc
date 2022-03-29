@@ -31,18 +31,23 @@ OAuth.registerService('oidc', 2, null, function (query) {
 
   var profile = {};
   profile.name = userinfo.name;
-  profile.email = userinfo.email;
+
+  var email = {
+    address: userinfo.email,
+    verified: true
+  }
+
   if (debug) console.log('XXX: profile:', profile);
 
   return {
     serviceData: serviceData,
-    options: { profile: profile }
+    options: { profile: profile, emails: [email] }
   };
 });
 
-var userAgent = "Meteor";
+var userAgent = 'Meteor';
 if (Meteor.release) {
-  userAgent += "/" + Meteor.release;
+  userAgent += `/${Meteor.release}`;
 }
 
 var getToken = function (query) {
@@ -57,7 +62,7 @@ var getToken = function (query) {
       {
         headers: {
           Accept: 'application/json',
-          "User-Agent": userAgent
+          'User-Agent': userAgent
         },
         params: {
           code: query.code,
@@ -70,12 +75,12 @@ var getToken = function (query) {
       }
     );
   } catch (err) {
-    throw _.extend(new Error("Failed to get token from OIDC " + serverTokenEndpoint + ": " + err.message),
+    throw _.extend(new Error(`Failed to get token from OIDC ${serverTokenEndpoint}: ${err.message}`),
       { response: err.response });
   }
   if (response.data.error) {
     // if the http response was a json object with an error attribute
-    throw new Error("Failed to complete handshake with OIDC " + serverTokenEndpoint + ": " + response.data.error);
+    throw new Error(`Failed to complete handshake with OIDC ${serverTokenEndpoint}: ${response.data.error}`);
   } else {
     if (debug) console.log('XXX: getToken response: ', response.data);
     return response.data;
@@ -131,13 +136,13 @@ var getUserInfoFromEndpoint = function (accessToken, config, expiresAt) {
   try {
     response = HTTP.get(serverUserinfoEndpoint, {
       headers: {
-        "User-Agent": userAgent,
-        "Authorization": "Bearer " + accessToken
+        'User-Agent': userAgent,
+        'Authorization': `Bearer ${accessToken}`
       }
     });
   }
   catch (err) {
-    throw _.extend(new Error("Failed to fetch userinfo from OIDC " + serverUserinfoEndpoint + ": " + err.message), { response: err.response });
+    throw _.extend(new Error(`Failed to fetch userinfo from OIDC ${serverUserinfoEndpoint}: ${err.message}`), { response: err.response });
   }
   if (debug)
     console.log('XXX: getUserInfo response: ', response.data);

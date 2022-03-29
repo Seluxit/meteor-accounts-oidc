@@ -18,8 +18,10 @@ Oidc.requestCredential = function (options, credentialRequestCompleteCallback) {
       new ServiceConfiguration.ConfigError('Service oidc not configured.'));
     return;
   }
-  
+
   var credentialToken = Random.secret();
+  var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+  var display = mobile ? 'touch' : 'popup';
   var loginStyle = OAuth._loginStyle('oidc', config, options);
   var scope = config.requestPermissions || ['openid', 'profile', 'email'];
 
@@ -36,18 +38,19 @@ Oidc.requestCredential = function (options, credentialRequestCompleteCallback) {
   }
 
   var loginUrl = config.serverUrl + config.authorizationEndpoint;
-  // check if the loginUrl already contains a "?"
-  var first = !loginUrl.indexOf('?') === -1;
-  for (var k in options) {
-    if (first) {
-      loginUrl += '?';
-      first = false;
-    }
-    else {
-      loginUrl += '&'
-    }
-    loginUrl += encodeURIComponent(k) + '=' + encodeURIComponent(options[k]);
+  // check if the loginUrl already contains a '?'
+  var hasExistingParams = loginUrl.indexOf('?') !== -1;
+
+  if (!hasExistingParams) {
+    loginUrl += '?';
   }
+  else {
+    loginUrl += '&'
+  }
+
+  loginUrl += Object.keys(options).map(function(key) {
+      return [key, options[key]].map(encodeURIComponent).join('=');
+  }).join('&');
 
   //console.log('XXX: loginURL: ' + loginUrl)
 

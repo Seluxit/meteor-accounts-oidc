@@ -1,6 +1,8 @@
 Template.configureLoginServiceDialogForOidc.helpers({
     siteUrl: function () {
-        return Meteor.absoluteUrl();
+        return Meteor.absoluteUrl({
+          replaceLocalhost: true
+        });
     }
 });
 

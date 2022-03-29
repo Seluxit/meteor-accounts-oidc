@@ -1,14 +1,14 @@
 Package.describe({
-  summary: "OpenID Connect (OIDC) flow for Meteor",
-  version: "1.0.7",
-  name: "switch:oidc",
-  git: "https://github.com/switch-ch/meteor-accounts-oidc.git",
+  summary: 'OpenID Connect (OIDC) flow for Meteor',
+  version: '1.0.9',
+  name: 'seluxit:oidc',
+  git: 'https://github.com/seluxit/meteor-accounts-oidc.git',
 });
 
 Package.onUse(function(api) {
-  api.use('oauth2@1.1.0', ['client', 'server']);
-  api.use('oauth@1.1.0', ['client', 'server']);
-  api.use('http@1.1.0', 'server');
+  api.use('oauth2@1.3.1', ['client', 'server']);
+  api.use('oauth@2.1.0', ['client', 'server']);
+  api.use('http@2.0.0', 'server');
   api.use('underscore@1.0.0', ['server', 'client']);
   api.use('templating@1.1.0', 'client');
   api.use('random@1.0.0', 'client');

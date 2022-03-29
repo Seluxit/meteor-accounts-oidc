@@ -3,7 +3,7 @@ Accounts.oauth.registerService('oidc');
 if (Meteor.isClient) {
   Meteor.loginWithOidc = function(options, callback) {
     // support a callback without options
-    if (! callback && typeof options === "function") {
+    if (! callback && typeof options === 'function') {
       callback = options;
       options = null;
     }
