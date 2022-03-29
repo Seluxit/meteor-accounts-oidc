@@ -1,6 +1,6 @@
 # seluxit:oidc package
 
-A Meteor implementation of OpenID Connect Login flow
+A Meteor implementation of OpenID Connect Login flow based on `switch:oidc`.
 
 ## Usage and Documentation
 
