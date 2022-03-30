@@ -12,7 +12,7 @@ Package.onUse(function(api) {
   api.imply('accounts-base', ['client', 'server']);
   api.use('accounts-oauth@1.4.0', ['client', 'server']);
 
-  api.use('seluxit:oidc@1.0.8', ['client', 'server']);
+  api.use('seluxit:oidc@1.1.0', ['client', 'server']);
 
   api.addFiles('oidc_login_button.css', 'client');
   api.addFiles('oidc.js');
