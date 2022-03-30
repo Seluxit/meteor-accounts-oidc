@@ -4,18 +4,18 @@
 
 ## Packages
 
-The `switch::accounts-oidc` and `switch:oidc` packages are published in [Atmoshere](https://atmospherejs.com/)
+The `seluxit::accounts-oidc` and `seluxit:oidc` packages are published in [Atmoshere](https://atmospherejs.com/)
 
 ## Install
 
 You can simply add the package to your project with:
 
-    meteor add switch:accounts-oidc
+    meteor add seluxit:accounts-oidc
     
 ## Documentation
 
 The package documentation is available here:
-  * https://atmospherejs.com/switch/accounts-oidc
+  * https://atmospherejs.com/seluxit/accounts-oidc
 
 
   
