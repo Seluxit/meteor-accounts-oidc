@@ -1,6 +1,6 @@
 Package.describe({
   summary: 'OpenID Connect (OIDC) flow for Meteor',
-  version: '1.0.9',
+  version: '1.1.0',
   name: 'seluxit:oidc',
   git: 'https://github.com/seluxit/meteor-accounts-oidc.git',
 });
